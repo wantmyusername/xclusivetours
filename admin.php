@@ -219,6 +219,13 @@
 							</div>
 						</div>
 						<div class="mb-2 md:mb-1 md:flex items-center">
+							<label class="w-32 text-gray-800 block font-bold text-sm uppercase tracking-wide">Hotel</label>
+							<span class="mr-4 inline-block hidden md:block">:</span>
+							<div class="flex-1">
+								<input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" type="text" placeholder="Hotel" x-model="from.hotel">
+							</div>
+						</div>						
+						<div class="mb-2 md:mb-1 md:flex items-center">
 							<label class="w-32 text-gray-800 block font-bold text-sm uppercase tracking-wide">País de origen</label>
 							<span class="mr-4 inline-block hidden md:block">:</span>
 							<div class="flex-1">
@@ -231,6 +238,9 @@
 					<div class="flex-1 px-1">
 						<p class="text-gray-800 uppercase tracking-wide text-sm font-bold">Tour</p>
 					</div>
+					<div class="px-1 w-32 text-right">
+						<p class="text-gray-800 uppercase tracking-wide text-sm font-bold">Pick Up Time</p>
+					</div>					
 					<div class="px-1 w-20 text-right">
 						<p class="text-gray-800 uppercase tracking-wide text-sm font-bold">PAX</p>
 					</div>
@@ -247,10 +257,14 @@
 					<div class="px-1 w-20 text-center">
 					</div>
 				</div>
+			
 				<template x-for="invoice in items" :key="invoice.id">
 				<div class="flex -mx-1 py-2 border-b">
 					<div class="flex-1 px-1 inline-flex items-baseline">
 						<p class="text-base font-bold" x-text="invoice.name"></p><p class="text-blue-800 text-xs font-semibold ml-2 px-2.5 py0.5 rounded dark:bg-blue-400 dark:text-blue-800" x-text="invoice.menor"></p>
+					</div>
+					<div class="px-1 w-32 text-right">
+						<p class="text-gray-800" x-text="invoice.PickUp"></p>
 					</div>
 					<div class="px-1 w-20 text-right">
 						<p class="text-gray-800" x-text="invoice.qty"></p>
@@ -269,6 +283,10 @@
 				<button class="mt-6 bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 text-sm border border-gray-300 rounded shadow-sm" x-on:click="openModal = !openModal">
 				Agregar tour
 				</button>
+				<button class="mt-6 bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 text-sm border border-gray-300 rounded shadow-sm" x-on:click="openModal2 = !openModal2">
+				Agregar servicio
+				</button>
+
 				<div class="py-2 ml-auto mt-5 w-full sm:w-2/4 lg:w-1/4">
 					<div class="py-2 border-t border-b">
 						<div class="flex justify-between">
@@ -337,6 +355,11 @@
 										<div x-text="invoiceDueDate"></div>
 									</div>
 									<div class="flex items-center">
+										<label class="w-32 text-gray-800 block font-bold text-xs uppercase tracking-wide">Hotel</label>
+										<span class="mr-4 inline-block">:</span>
+										<div x-text="from.hotel"></div>
+									</div>
+									<div class="flex items-center">
 										<label class="w-32 text-gray-800 block font-bold text-xs uppercase tracking-wide">País de origen</label>
 										<span class="mr-4 inline-block">:</span>
 										<div x-text="from.pais"></div>
@@ -346,6 +369,9 @@
 							<div class="flex border-b py-2 items-start">
 								<div class="flex-1 px-1">
 									<p class="text-gray-800 uppercase tracking-wide text-xs font-bold">Tour</p>
+								</div>
+								<div class="px-1 w-32 text-right">
+									<p class="text-gray-800 uppercase tracking-wide text-xs font-bold">Pick Up TIme</p>
 								</div>
 								<div class="px-1 w-20 text-right">
 									<p class="text-gray-800 uppercase tracking-wide text-xs font-bold">PAX</p>
@@ -367,6 +393,10 @@
 									<p class="text-gray-800" x-text="invoice.name"></p> <p class="text-blue-800 text-xs font-semibold ml-2 px-2.5 py0.5 rounded dark:bg-blue-400 dark:text-blue-800" x-text="invoice.menor"></p>
 								</div>
 								
+								<div class="px-1 w-32 text-right">
+									<p class="text-gray-800" x-text="invoice.PickUp"></p>
+								</div>
+
 								<div class="px-1 w-32 text-right">
 									<p class="text-gray-800" x-text="invoice.qty"></p>
 								</div>
@@ -459,7 +489,7 @@
 					</section>
 				</div>
 				<!-- /Print Template -->
-				<!-- Modal -->
+				<!-- Modal tours -->
 				<div style=" background-color: rgba(0, 0, 0, 0.8)" class="fixed z-40 top-0 right-0 left-0 bottom-0 h-full w-full" x-show.transition.opacity="openModal">
 					<div class="p-4 max-w-xl mx-auto relative absolute left-0 right-0 overflow-hidden mt-24">
 						<div class="shadow absolute right-0 top-0 w-10 h-10 rounded-full bg-white text-gray-500 hover:text-gray-800 inline-flex items-center justify-center cursor-pointer"
@@ -471,7 +501,7 @@
 							</div>
 							<div class="shadow w-full rounded-lg bg-white overflow-hidden w-full block p-8">
 								
-								<h2 class="font-bold text-2xl mb-6 text-gray-800 border-b pb-2">Agrega o selecciona un tour</h2>
+								<h2 class="font-bold text-2xl mb-6 text-gray-800 border-b pb-2">Agrega un tour</h2>
 								
 								<div class="mb-4">
 									<label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">Tour</label>
@@ -493,10 +523,6 @@
 										<option value="Tour Isla Contoy">Tour Isla Contoy</option>
 										<option value="5x1 Tulum">5x1 Tulum</option>
 										<option value="Bacalar + Paseo en lancha">Bacalar + Paseo en lancha</option>
-										<option value="Servicio de Transportación">Servicio de Transportación</option>
-										<option value="Renta de Kia Río 2022">Renta de Kia Río 2022</option>
-										<option value="Servicio de Tour Privado">Servicio de Tour Privado</option>
-										<option value="Chichen Delux">Chichen Delux</option>
 									</select>
 								</div>
 								<div class="flex">
@@ -514,15 +540,23 @@
 									</div>
 								</div>
 								<div class="flex">
-									<div class="mb-4 w-52 mr-2">
-										<label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide" required>¿Es menor?</label>
-										<select id="tours" class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" x-model="item.menor">
-											<option value="" hidden>Seleccionar...</option>
-											<option value="">No</option>
-											<option value="Precio de menores">Si</option>
-										</select>
+									<div class="flex">
+										<div class="mb-4 w-52 mr-2">
+											<label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide" required>¿Es menor?</label>
+											<select id="tours" class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" x-model="item.menor">
+												<option value="" hidden>Seleccionar...</option>
+												<option value="&#160;">No</option>
+												<option value="Precio de menores">Si</option>
+											</select>
+										</div>
 									</div>
-								</div>
+									<div class="flex">
+										<div class="mb-4 w-52 mr-2">
+											<label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide" required>Hora del PickUp (24hrs)</label>
+										<input class="text-right mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" type="time" x-model="item.PickUp">
+										</div>
+									</div>	
+								</div>							
 								<div class="mt-8 text-right">
 									<button type="button" class="bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 border border-gray-300 rounded shadow-sm mr-2" @click="openModal = !openModal">
 									Cancelar
@@ -534,7 +568,59 @@
 							</div>
 						</div>
 					</div>
-					<!-- /Modal -->
+					<!-- /Modal Tours -->
+				<!-- Modal servicios -->
+				<div style=" background-color: rgba(0, 0, 0, 0.8)" class="fixed z-40 top-0 right-0 left-0 bottom-0 h-full w-full" x-show.transition.opacity="openModal2">
+					<div class="p-4 max-w-xl mx-auto relative absolute left-0 right-0 overflow-hidden mt-24">
+						<div class="shadow absolute right-0 top-0 w-10 h-10 rounded-full bg-white text-gray-500 hover:text-gray-800 inline-flex items-center justify-center cursor-pointer"
+							x-on:click="openModal2 = !openModal2">
+							<svg class="fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path
+									d="M16.192 6.344L11.949 10.586 7.707 6.344 6.293 7.758 10.535 12 6.293 16.242 7.707 17.656 11.949 13.414 16.192 17.656 17.606 16.242 13.364 12 17.606 7.758z" />
+								</svg>
+							</div>
+							<div class="shadow w-full rounded-lg bg-white overflow-hidden w-full block p-8">
+								
+								<h2 class="font-bold text-2xl mb-6 text-gray-800 border-b pb-2">Agrega un servicio</h2>
+								
+								<div class="mb-4">
+									<label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">Servicio</label>
+									<select id="tours" class="mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" x-model="item.name">
+										<option value="" hidden>Seleccionar...</option>
+										<option value="Servicio de Transportación">Servicio de Transportación</option>
+										<option value="Renta de Kia Río 2022">Renta de Kia Río 2022</option>
+										<option value="Servicio de Tour Privado">Servicio de Tour Privado</option>
+										<option value="Chichen Delux">Chichen Delux</option>
+									</select>
+								</div>
+								<div class="flex">
+									<div class="mb-4 w-42 mr-2">
+										<label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">PAX (coloca sólo 1)</label>
+										<input type="number" min="1" max="1" class="text-right mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" x-model="item.qty">
+									</div>									
+									<div class="flex">
+										<div class="mb-4 w-32 mr-2">
+											<label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide" required>PICKUP</label>
+										<input class="text-right mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" type="time" x-model="item.PickUp">
+										</div>
+									</div>
+									<div class="mb-4 w-32 mr-2">
+										<label class="text-gray-800 block mb-1 font-bold text-sm uppercase tracking-wide">Total</label>
+										<input class="text-right mb-1 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" type="text" x-model="item.rate">
+									</div>																			
+								</div>						
+								<div class="mt-8 text-right">
+									<button type="button" class="bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 border border-gray-300 rounded shadow-sm mr-2" @click="openModal2 = !openModal2">
+									Cancelar
+									</button>
+									<button type="button" class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow-sm" @click="addItem()">
+									Agregar servicio
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Modal Servicio -->
 				</div>
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
 				<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
@@ -643,13 +729,16 @@
 							showTooltip: false,
 							showTooltip2: false,
 							openModal: false,
+							openModal2: false,							
 							addItem() {
 								this.items.push({
 									id: this.generateUUID(),
 									name: this.item.name,
 									menor: this.item.menor,
+									PickUp: this.item.PickUp,
 									estadopago: this.item.estadopago,
 									observaciones: this.item.observaciones,
+									eltotal: this.item.eltotal,									
 									qty: this.item.qty,
 									rate: this.item.rate,
 									gst: this.calculateGST(this.item.gst, this.item.rate),
@@ -664,6 +753,7 @@
 								this.item.rate = 0;
 								this.item.gst = 18;
 								this.item.total = 0;
+								this.item.eltotal = 0;																
 							},
 							deleteItem(uuid) {
 								this.items = this.items.filter(item => uuid !== item.id);
