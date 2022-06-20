@@ -437,7 +437,8 @@
 										<li class="text-xs text-gray-600 text-left flex-1">» Bloqueador solar</li>
 										<li class="text-xs text-gray-600 text-left flex-1">» Lentes para sol</li>
 										<li class="text-xs text-gray-600 text-left flex-1">» Gorra o sombrero</li>
-										<li class="text-xs text-gray-600 text-left flex-1">» Dinero en efectivo extra para el impuesto del muelle y bebidas adicionales</li>
+										<li class="text-xs text-gray-600 text-left flex-1">» Dinero en efectivo</li>
+										<li class="text-xs text-gray-600 text-left flex-1">» Efectivo extra para el impuesto del muelle (dependiendo la actividad)</li>
 									</ul>
 								</div>
 							</div>
@@ -523,6 +524,7 @@
 										<option value="Tour Isla Contoy">Tour Isla Contoy</option>
 										<option value="5x1 Tulum">5x1 Tulum</option>
 										<option value="Bacalar + Paseo en lancha">Bacalar + Paseo en lancha</option>
+										<option value="Chichen Delux">Chichen Delux</option>										
 									</select>
 								</div>
 								<div class="flex">
@@ -590,7 +592,9 @@
 										<option value="Servicio de Transportación">Servicio de Transportación</option>
 										<option value="Renta de Kia Río 2022">Renta de Kia Río 2022</option>
 										<option value="Servicio de Tour Privado">Servicio de Tour Privado</option>
-										<option value="Chichen Delux">Chichen Delux</option>
+										<option value="Servicio de Tour Privado">Servicio Aeropuerto - Hotel (One way)</option>
+										<option value="Servicio de Tour Privado">Servicio Aeropuerto - Hotel (roundtrip)</option>
+										<option value="Servicio de Tour Privado">Servicio Hotel - Aeropuerto</option>										
 									</select>
 								</div>
 								<div class="flex">
